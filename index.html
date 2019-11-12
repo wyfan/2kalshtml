@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -13,6 +13,7 @@
 </header>
 
 <body>
+
   <div id="kals_config">
     {{config_value}}
   </div>
@@ -24,66 +25,45 @@
     <textarea id='textarea' v-model="text"></textarea>
   </div>
 
+  <!----summernote editor--------->
+  <form method="post">
+    <textarea id="summernote" name="editordata"></textarea>
+  </form>
+
   <input type="button" id='btnCreatFile' value="產生檔案!"></input>
   <input type="button" id='btnRevokeFile' value="移除URL!"></input>
   <a id='btnDownload'></a>
+
+
+
+
 <!---script--------->
+
+
   <script src="./js/vue.js"></script>
   <script src="./js/jquery-3.4.1.min.js"></script>
+  <script src="./js/2kalshtml.js"></script>
+  <!----summernote-------->
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+  <link href="./libs/summernote0.8.12/dist/summernote.css" rel="stylesheet">
+  <script src="./libs/summernote0.8.12/dist/summernote.js"></script>
+  <script src="./libs/summernote0.8.12/dist/lang/summernote-zh-TW.js"></script>
 <!------------------>
-  <script>
-    var textareaData = {
-      text:'請輸入文字'
-    }
-    var show = new Vue({
-      el: '#show',
-      data:textareaData,
-    })
 
-//-----------------
-    var kals_config = new Vue({
-      el: '#kals_config',
-      data: {
-        config_value:'Here is Vue block!',
-      },
-    })
-//-----------------------
-$(function(){
-    var $link = $("#btnDownload");
+<script>
+  //$(document).ready(function() {
+      $('#summernote').summernote({
+        height: 400,
+        width: 800,               // set editor height
+        minHeight: null,             // set minimum height of editor
+        focus: true
+      });
+  //});
+  var editInfo = '請在此編輯您的文本內容';
+  $('#summernote').summernote('code', editInfo);
+</script>
 
-    $('#btnCreatFile').click(function(){
-      console.log("有沒有抓到TEXT啊：" + $("#showContent").text());
-      var kalsUrl = "http%3A%2F%2Fexp-kals-2012.dlll.nccu.edu.tw%2Fkals%2Fweb_apps%2Fgeneric%2Floader%2Frelease";
-      //---開始組成HTML(Header部份)-------
-      var htmlHeader = "<html><head><meta charset='utf-8'><title>kals文本</title></head><body>";
-      //---開始組成HTML(內容部份)-------
-      var htmlContent = $("#showContent").text()
-                        +"<div>test!!!</div>";
-      //---開始組成HTML(KALS設定部份)-------
-      var htmlKalsconfig = "<div>config</div>";
-      //---開始組成HTML(footer設定部份)-------
-      var htmlFooter = "</body></html>";
-
-      var htmlAll = htmlHeader + htmlContent + htmlKalsconfig + htmlFooter;
-
-      var blob = new Blob([htmlAll], //$("#showContent").text()
-        {type:"application/octect-stream" });
-      var blobUrl = URL.createObjectURL(blob);
-      var fileName = "words.html";
-      $link.attr({ href: blobUrl, download: fileName })
-                 .text(fileName).removeClass("revoke");
-    });
-    $('#btnRevokeUrl').click(function() {
-      URL.revokeObjectURL($link.attr("href"));
-      $link.addClass("revoke");
-    });
-
-});
-
-/*function createHtml(){
-  alert(document.getElementById("textarea").value);
-}*/
-  </script>
 </body>
 <footer></footer>
 
