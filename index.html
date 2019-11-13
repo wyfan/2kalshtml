@@ -26,9 +26,8 @@
   </div>
 
   <!----summernote editor--------->
-  <form method="post">
-    <textarea id="summernote" name="editordata"></textarea>
-  </form>
+  <div id="summernote">Hello Summernote</div>
+
 
   <input type="button" id='btnCreatFile' value="產生檔案!"></input>
   <input type="button" id='btnRevokeFile' value="移除URL!"></input>
@@ -43,11 +42,9 @@
   <script src="./js/vue.js"></script>
   <script src="./js/jquery-3.4.1.min.js"></script>
   <script src="./js/2kalshtml.js"></script>
-  <!----summernote-------->
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-  <link href="./libs/summernote0.8.12/dist/summernote.css" rel="stylesheet">
-  <script src="./libs/summernote0.8.12/dist/summernote.js"></script>
+  <!----summernote lite-------->
+  <link href="./libs/summernote0.8.12/dist/summernote-lite.css" rel="stylesheet">
+  <script src="./libs/summernote0.8.12/dist/summernote-lite.js"></script>
   <script src="./libs/summernote0.8.12/dist/lang/summernote-zh-TW.js"></script>
 <!------------------>
 
@@ -57,11 +54,14 @@
         height: 400,
         width: 800,               // set editor height
         minHeight: null,             // set minimum height of editor
+        lang: 'zh-TW',
         focus: true
       });
   //});
   var editInfo = '請在此編輯您的文本內容';
   $('#summernote').summernote('code', editInfo);
+
+
 </script>
 
 </body>
